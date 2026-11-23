@@ -17,6 +17,8 @@ enum MuscleGroup: String, Codable, CaseIterable, Identifiable {
 
 @Model
 final class Exercise {
+    /// Stable ID shared with the cloud copy of this record.
+    var uuid: UUID = UUID()
     var name: String
     var primaryRaw: [String]
     var secondaryRaw: [String]
@@ -35,6 +37,8 @@ final class Exercise {
 
 @Model
 final class WorkoutSession {
+    /// Stable ID shared with the cloud copy of this record.
+    var uuid: UUID = UUID()
     var start: Date
     var end: Date?
     var notes: String
@@ -57,13 +61,15 @@ final class WorkoutSession {
 
 @Model
 final class ExerciseEntry {
+    /// Stable ID shared with the cloud copy of this record.
+    var uuid: UUID = UUID()
     var order: Int
     var exercise: Exercise?
     var session: WorkoutSession?
     @Relationship(deleteRule: .cascade, inverse: \SetEntry.entry)
     var sets: [SetEntry] = []
 
-    init(exercise: Exercise, order: Int) {
+    init(exercise: Exercise?, order: Int) {
         self.exercise = exercise
         self.order = order
     }
@@ -75,6 +81,8 @@ final class ExerciseEntry {
 
 @Model
 final class SetEntry {
+    /// Stable ID shared with the cloud copy of this record.
+    var uuid: UUID = UUID()
     var order: Int
     var reps: Int
     var weightKg: Double
@@ -97,6 +105,8 @@ final class SetEntry {
 
 @Model
 final class BodyMeasurement {
+    /// Stable ID shared with the cloud copy of this record.
+    var uuid: UUID = UUID()
     var date: Date
     var weightKg: Double?
     var bodyFatPercent: Double?
